@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="./codtech-task1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-section">
+            <input type="text" id="task-input" placeholder="Add a new task...">
+            <button id="add-task-button">Add Task</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="./codtech-task1.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+#task-input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#add-task-button {
+    width: 25%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-task-button:hover {
+    background-color: #218838;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.task button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task button:hover {
+    background-color: #c82333;
+}
+document.getElementById('add-task-button').addEventListener('click', addTask);
+
+function addTask() {
+    const taskInput = document.getElementById('task-input');
+    const taskText = taskInput.value.trim();
+
+    if (taskText === '') {
+        alert('Please enter a task.');
+        return;
+    }
+
+    const taskList = document.getElementById('task-list');
+
+    const taskItem = document.createElement('li');
+    taskItem.className = 'task';
+
+    const taskContent = document.createElement('span');
+    taskContent.textContent = taskText;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => {
+        taskList.removeChild(taskItem);
+    });
+
+    taskItem.appendChild(taskContent);
+    taskItem.appendChild(deleteButton);
+
+    taskList.appendChild(taskItem);
+
+    taskInput.value = '';
+}
+   
